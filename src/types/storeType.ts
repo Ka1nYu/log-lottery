@@ -40,6 +40,7 @@ export interface IPrizeConfig {
     isShow: boolean
     isUsed: boolean
     frequency: number
+    specifiedIds?: string[]
 }
 export interface IMusic {
     id: string

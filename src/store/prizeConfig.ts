@@ -28,6 +28,7 @@ export const usePrizeConfig = defineStore('prize', {
                     isShow: false,
                     isUsed: false,
                     frequency: 1,
+                    specifiedIds: [],
                 } as IPrizeConfig,
             },
         }
@@ -160,6 +161,7 @@ export const usePrizeConfig = defineStore('prize', {
                     isShow: false,
                     isUsed: false,
                     frequency: 1,
+                    specifiedIds: [],
                 } as IPrizeConfig,
             }
         },

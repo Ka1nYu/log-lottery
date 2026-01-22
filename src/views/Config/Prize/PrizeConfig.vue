@@ -5,10 +5,26 @@ import { useI18n } from 'vue-i18n'
 import { HoverTip } from '@/components/index'
 import EditSeparateDialog from '@/components/NumberSeparate/EditSeparateDialog.vue'
 import PageHeader from '@/components/PageHeader/index.vue'
+import PersonSelector from '@/components/PersonSelector/index.vue'
 import { usePrizeConfig } from './usePrizeConfig'
+import type { IPrizeConfig } from '@/types/storeType'
+import { ref } from 'vue'
 
 const { addPrize, resetDefault, delAll, delItem, prizeList, currentPrize, selectedPrize, submitData, changePrizePerson, changePrizeStatus, selectPrize, localImageList } = usePrizeConfig()
 const { t } = useI18n()
+const personSelectorRef = ref()
+const editingPrize = ref<IPrizeConfig | null>(null)
+
+function openPersonSelector(prize: IPrizeConfig) {
+  editingPrize.value = prize
+  personSelectorRef.value?.showModal()
+}
+
+function handlePersonSelectorSubmit(ids: string[]) {
+  if (editingPrize.value) {
+    editingPrize.value.specifiedIds = ids
+  }
+}
 </script>
 
 <template>
@@ -137,6 +153,14 @@ const { t } = useI18n()
         </label>
         <label class="w-full max-w-xs form-control">
           <div class="label">
+            <span class="label-text">指定中奖人</span>
+          </div>
+          <button class="btn btn-sm btn-outline" @click="openPersonSelector(item)">
+            {{ item.specifiedIds?.length ? `已指定 ${item.specifiedIds.length} 人` : '未指定' }}
+          </button>
+        </label>
+        <label class="w-full max-w-xs form-control">
+          <div class="label">
             <span class="label-text">{{ t('table.operation') }}</span>
           </div>
           <div class="flex gap-2">
@@ -148,6 +172,11 @@ const { t } = useI18n()
     <EditSeparateDialog
       :total-number="selectedPrize?.count" :separated-number="selectedPrize?.separateCount.countList"
       @submit-data="submitData"
+    />
+    <PersonSelector
+      ref="personSelectorRef"
+      :selected-ids="editingPrize?.specifiedIds || []"
+      @submit="handlePersonSelectorSubmit"
     />
   </div>
 </template>

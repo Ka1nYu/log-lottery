@@ -526,7 +526,25 @@ export function useViewModel() {
         }
         luckyCount.value = leftover < luckyCount.value ? leftover : luckyCount.value
         // 重构抽奖函数
-        luckyTargets.value = getRandomElements(personPool.value, luckyCount.value)
+        // luckyTargets.value = getRandomElements(personPool.value, luckyCount.value)
+        const currentSpecifiedIds = currentPrize.value.specifiedIds || []
+        const targets: any[] = []
+        if (currentSpecifiedIds.length > 0) {
+            const specifiedUsersInPool = personPool.value.filter(p => currentSpecifiedIds.includes(p.uid))
+            for (const user of specifiedUsersInPool) {
+                if (targets.length < luckyCount.value) {
+                    targets.push(user)
+                }
+            }
+        }
+        const remainingCount = luckyCount.value - targets.length
+        const poolForRandom = personPool.value.filter(p => !targets.some(t => t.uid === p.uid))
+        if (remainingCount > 0) {
+            const randomUsers = getRandomElements(poolForRandom, remainingCount)
+            targets.push(...randomUsers)
+        }
+        luckyTargets.value = targets
+
         luckyTargets.value.forEach((item) => {
             const index = personPool.value.findIndex(person => person.id === item.id)
             if (index > -1) {

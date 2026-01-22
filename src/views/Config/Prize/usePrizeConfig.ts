@@ -103,6 +103,7 @@ export function usePrizeConfig() {
             isUsed: false,
             isShow: true,
             frequency: 1,
+            specifiedIds: [],
         }
         prizeList.value.push(defaultPrizeCOnfig)
         toast.success(i18n.global.t('error.success'))

@@ -123,6 +123,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
         isShow: true,
         isUsed: false,
         frequency: 1,
+        specifiedIds: [],
     },
     {
         id: '002',
@@ -144,6 +145,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
         isShow: true,
         isUsed: false,
         frequency: 1,
+        specifiedIds: [],
     },
     {
         id: '003',
@@ -165,6 +167,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
         isShow: true,
         isUsed: false,
         frequency: 1,
+        specifiedIds: [],
     },
     {
         id: '004',
@@ -186,6 +189,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
         isShow: true,
         isUsed: false,
         frequency: 1,
+        specifiedIds: [],
     },
     {
         id: '005',
@@ -207,6 +211,7 @@ export const defaultPrizeList = <IPrizeConfig[]>[
         isShow: true,
         isUsed: false,
         frequency: 1,
+        specifiedIds: [],
     },
 ]
 export const defaultCurrentPrize = <IPrizeConfig>{
