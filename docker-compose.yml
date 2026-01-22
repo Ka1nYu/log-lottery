@@ -1,0 +1,9 @@
+version: '3'
+services:
+  log-lottery:
+    build: .
+    image: log-lottery:latest
+    container_name: log-lottery
+    ports:
+      - "80:80"
+    restart: always
