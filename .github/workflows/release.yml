@@ -1,5 +1,8 @@
 name: Build and Release
 
+permissions:
+  contents: write
+
 on:
   workflow_dispatch:
   push:
@@ -10,12 +13,9 @@ jobs:
   build-web:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -25,7 +25,7 @@ jobs:
           version: 8
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 22.x
           cache: pnpm
@@ -60,13 +60,11 @@ jobs:
           force_orphan: true
 
   publish-tauri:
-    permissions:
-      contents: write
     runs-on: windows-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -84,7 +82,7 @@ jobs:
           version: 8
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 22.x
           cache: pnpm
@@ -111,7 +109,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
